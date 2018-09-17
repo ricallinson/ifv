@@ -40,17 +40,25 @@ func (this *Story) OutputScene() {
 	Output(this.currentLocation.Discribe(), true)
 }
 
+func (this *Story) OutputItems() {
+	
+}
+
 func (this *Story) OutputOptions() {
 	Output(randStringSelection(this.OptionsTitle), true)
 	for i, l := range this.currentLocation.Exits {
 		OutputOption(i+1, this.GetLocation(l.Id).Discribe())
 	}
+	OutputOption(len(this.currentLocation.Exits)+1, randStringSelection(this.SearchOptionsTitle))
 	Output("", true)
-	Output(randStringSelection(this.OptionsChooseTitle), true)
+	Output(randStringSelection(this.SearchOptionsTitle), true)
 	input, _ := this.input.ReadString('\n')
 	choice, _ := strconv.Atoi(strings.TrimSpace(input))
 	if choice > 0 && choice <= len(this.currentLocation.Exits) {
 		this.currentLocation = this.GetLocation(this.currentLocation.Exits[choice-1].Id)
+	}
+	if choice == len(this.currentLocation.Exits) {
+		this.OutputItems()
 	}
 }
 
@@ -61,7 +69,7 @@ func (this *Story) Loop() {
 }
 
 func OutputOption(i int, s string) {
-	fmt.Print(i, ") ", s)
+	fmt.Println(i, ") ", s)
 }
 
 func Output(s string, newline bool) {

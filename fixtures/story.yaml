@@ -8,6 +8,15 @@ OptionsTitle:
 OptionsChooseTitle: 
   - What do you want to do?
   - Whats next?
+SearchOptionsTitle:
+  - Do you want to look about?
+  - There might be somehting you can use here.
+SearchingTitle:
+  - You see;
+  - After a rumaging you find;
+SearchChooseTitle:
+  - Do you want to take anything?
+  - Anything take your fancy?
 Locations:
   - Id: the bed
     Scene: The small cot bed in the corner of the room is where you've been sleeping for as long as you can remember.

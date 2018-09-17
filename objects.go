@@ -32,6 +32,7 @@ type Item struct {
 	Descriptions []string `yaml:"Descriptions"`
 	Success      []string `yaml:"Success"`
 	Failure      []string `yaml:"Failure"`
+	visited      bool
 }
 
 type Story struct {
@@ -43,6 +44,9 @@ type Story struct {
 	ItemsLocations     map[string]string `yaml:"ItemsLocations"`
 	OptionsTitle       []string          `yaml:"OptionsTitle"`
 	OptionsChooseTitle []string          `yaml:"OptionsChooseTitle"`
+	SearchOptionsTitle        []string          `yaml:"SearchOptionsTitle"`
+	SearchingTitle        []string          `yaml:"SearchingTitle"`
+	SearchChooseTitle        []string          `yaml:"SearchChooseTitle"`
 	currentLocation    *Location
 	input              *bufio.Reader
 }
