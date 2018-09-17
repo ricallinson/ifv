@@ -1,0 +1,42 @@
+---
+Title: The Bunker
+Scene: Looking around you ask yourself how did this happen to me?
+LocationStart: the bed
+Locations:
+  - Id: the bed
+    Scene: The small cot bed in the corner of the room is where you've been sleeping for as long as you can remember.
+    Descriptions:
+      - Your smelly bed.
+      - Good old dirty.
+      - that bed of yours the Army wouldn't even use for torture.
+    Exits:
+      - Id: go to kitchen
+        Scene: You cross the floor to the smell of rotten food.
+        Descriptions:
+          - As you move some tolet paper sticks to your foot.
+          - You kick some paper and cockroch runs off under the bed.
+  - Id: the kitchen
+    Scene: A one sink, one hob mess.
+    Descriptions:
+      - Students takeaway.
+      - Kitchen from the traash can.
+    Exits:
+      - Id: go to bed
+        Scene: You cross the floor to the place you don't want to sleep.
+        Descriptions:
+          - Steping over some underware you stand at the foot of the bed.
+          - Looking at the bed you wonder. How did this become it?
+Items:
+  - Id: hammer
+    Scene: Laying there amounts the floor trash is an old hammer think with paint from it was last used.
+    Descriptions:
+      - The painted hammer.
+      - The one tool ever needed, a hammer.
+    Success:
+      - With one quick blow the hammer open it like a it was an orange.
+      - An almighty swing followed by the sound of breaking.
+    Failure:
+      - The hammer bounced off and nearly embedded its self in your head.
+      - The shockway struck you body like a train but nothing happened.
+ItemsLocations:
+  "hammer": the kitchen
