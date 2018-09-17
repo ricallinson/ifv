@@ -1,6 +1,8 @@
 package main
 
-import ()
+import (
+	"bufio"
+)
 
 type LocationExit struct {
 	Id           string   `yaml:"Id"`
@@ -18,6 +20,7 @@ type Location struct {
 
 func (this *Location) Discribe() string {
 	if this.visited == false {
+		this.visited = true
 		return this.Scene
 	}
 	return randStringSelection(this.Descriptions)
@@ -41,4 +44,5 @@ type Story struct {
 	OptionsTitle       []string          `yaml:"OptionsTitle"`
 	OptionsChooseTitle []string          `yaml:"OptionsChooseTitle"`
 	currentLocation    *Location
+	input              *bufio.Reader
 }

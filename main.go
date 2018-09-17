@@ -1,19 +1,24 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
 	"math/rand"
+	"os"
+	"strconv"
+	"strings"
 	"time"
 )
 
 func main() {
-	story := readYamlFileToStory("./fixtures/story.yaml")
+	this := readYamlFileToStory("./fixtures/story.yaml")
 	rand.Seed(time.Now().UTC().UnixNano())
-	story.OutputBegin()
-	story.Loop()
+	this.input = bufio.NewReader(os.Stdin)
+	this.OutputBegin()
+	this.Loop()
 }
 
 func (this *Story) GetLocation(id string) *Location {
@@ -42,11 +47,17 @@ func (this *Story) OutputOptions() {
 	}
 	Output("", true)
 	Output(randStringSelection(this.OptionsChooseTitle), true)
+	input, _ := this.input.ReadString('\n')
+	choice, _ := strconv.Atoi(strings.TrimSpace(input))
+	if choice > 0 && choice <= len(this.currentLocation.Exits) {
+		this.currentLocation = this.GetLocation(this.currentLocation.Exits[choice-1].Id)
+	}
 }
 
 func (this *Story) Loop() {
 	this.OutputScene()
 	this.OutputOptions()
+	this.Loop()
 }
 
 func OutputOption(i int, s string) {

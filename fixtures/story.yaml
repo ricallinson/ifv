@@ -12,9 +12,9 @@ Locations:
   - Id: the bed
     Scene: The small cot bed in the corner of the room is where you've been sleeping for as long as you can remember.
     Descriptions:
-      - Your smelly bed.
-      - Good old dirty.
-      - that bed of yours the Army wouldn't even use for torture.
+      - It's there, in all its gloy, your smelly bed.
+      - Good old yellow, the bed of champions.
+      - That bed of yours is one the army wouldn't even use for torture.
     Exits:
       - Id: the kitchen
         Scene: You cross the floor to the smell of rotten food.
@@ -24,8 +24,8 @@ Locations:
   - Id: the kitchen
     Scene: A one sink, one hob mess.
     Descriptions:
-      - Students takeaway kitchen hell.
-      - Kitchen equipped from the traash can of a homeless frog.
+      - A students takeaway kitchen from hell.
+      - Your kitchen equipped from the traash can of a homeless frog.
     Exits:
       - Id: the bed
         Scene: You cross the floor to the place you don't want to sleep.
