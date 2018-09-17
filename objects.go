@@ -1,5 +1,7 @@
 package main
 
+import ()
+
 type LocationExit struct {
 	Id           string   `yaml:"Id"`
 	Scene        string   `yaml:"Scene"`
@@ -11,6 +13,14 @@ type Location struct {
 	Scene        string          `yaml:"Scene"`
 	Descriptions []string        `yaml:"Descriptions"`
 	Exits        []*LocationExit `yaml:"Exits"`
+	visited      bool
+}
+
+func (this *Location) Discribe() string {
+	if this.visited == false {
+		return this.Scene
+	}
+	return randStringSelection(this.Descriptions)
 }
 
 type Item struct {
@@ -22,10 +32,13 @@ type Item struct {
 }
 
 type Story struct {
-	Title          string            `yaml:"Title"`
-	Scene          string            `yaml:"Scene"`
-	LocationStart  string            `yaml:"LocationStart"`
-	Locations      []*Location       `yaml:"Locations"`
-	Items          []*Item           `yaml:"Items"`
-	ItemsLocations map[string]string `yaml:"ItemsLocations"`
+	Title              string            `yaml:"Title"`
+	Scene              string            `yaml:"Scene"`
+	LocationStart      string            `yaml:"LocationStart"`
+	Locations          []*Location       `yaml:"Locations"`
+	Items              []*Item           `yaml:"Items"`
+	ItemsLocations     map[string]string `yaml:"ItemsLocations"`
+	OptionsTitle       []string          `yaml:"OptionsTitle"`
+	OptionsChooseTitle []string          `yaml:"OptionsChooseTitle"`
+	currentLocation    *Location
 }

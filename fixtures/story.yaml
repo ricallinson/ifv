@@ -2,6 +2,12 @@
 Title: The Bunker
 Scene: Looking around you ask yourself how did this happen to me?
 LocationStart: the bed
+OptionsTitle: 
+  - Looking around you see;
+  - Through your glazed eyes your see;
+OptionsChooseTitle: 
+  - What do you want to do?
+  - Whats next?
 Locations:
   - Id: the bed
     Scene: The small cot bed in the corner of the room is where you've been sleeping for as long as you can remember.
@@ -10,7 +16,7 @@ Locations:
       - Good old dirty.
       - that bed of yours the Army wouldn't even use for torture.
     Exits:
-      - Id: go to kitchen
+      - Id: the kitchen
         Scene: You cross the floor to the smell of rotten food.
         Descriptions:
           - As you move some tolet paper sticks to your foot.
@@ -18,10 +24,10 @@ Locations:
   - Id: the kitchen
     Scene: A one sink, one hob mess.
     Descriptions:
-      - Students takeaway.
-      - Kitchen from the traash can.
+      - Students takeaway kitchen hell.
+      - Kitchen equipped from the traash can of a homeless frog.
     Exits:
-      - Id: go to bed
+      - Id: the bed
         Scene: You cross the floor to the place you don't want to sleep.
         Descriptions:
           - Steping over some underware you stand at the foot of the bed.

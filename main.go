@@ -5,7 +5,16 @@ import (
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
+	"math/rand"
+	"time"
 )
+
+func main() {
+	story := readYamlFileToStory("./fixtures/story.yaml")
+	rand.Seed(time.Now().UTC().UnixNano())
+	story.OutputBegin()
+	story.Loop()
+}
 
 func (this *Story) GetLocation(id string) *Location {
 	for _, l := range this.Locations {
@@ -16,15 +25,46 @@ func (this *Story) GetLocation(id string) *Location {
 	return nil
 }
 
-func (this *Story) Begin(s *Story) {
-	fmt.Println(this.Title)
-	fmt.Print(this.Scene, " ")
-	fmt.Print(this.GetLocation(this.LocationStart).Scene, " ")
+func (this *Story) OutputBegin() {
+	Output(this.Title, true)
+	Output(this.Scene, false)
+	this.currentLocation = this.GetLocation(this.LocationStart)
 }
 
-func main() {
-	story := readYamlFileToStory("./fixtures/story.yaml")
-	story.Begin(story)
+func (this *Story) OutputScene() {
+	Output(this.currentLocation.Discribe(), true)
+}
+
+func (this *Story) OutputOptions() {
+	Output(randStringSelection(this.OptionsTitle), true)
+	for i, l := range this.currentLocation.Exits {
+		OutputOption(i+1, this.GetLocation(l.Id).Discribe())
+	}
+	Output("", true)
+	Output(randStringSelection(this.OptionsChooseTitle), true)
+}
+
+func (this *Story) Loop() {
+	this.OutputScene()
+	this.OutputOptions()
+}
+
+func OutputOption(i int, s string) {
+	fmt.Print(i, ") ", s)
+}
+
+func Output(s string, newline bool) {
+	fmt.Print(s)
+	if newline {
+		fmt.Print("\n\n")
+	} else {
+		fmt.Print(" ")
+	}
+}
+
+func randStringSelection(s []string) string {
+	i := rand.Intn(len(s))
+	return s[i]
 }
 
 // Reads a file into a byte array or exits.
