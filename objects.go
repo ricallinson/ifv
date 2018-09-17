@@ -1,8 +1,6 @@
 package main
 
-import (
-	"bufio"
-)
+import ()
 
 type LocationExit struct {
 	Id           string   `yaml:"Id"`
@@ -35,6 +33,14 @@ type Item struct {
 	visited      bool
 }
 
+func (this *Item) Discribe() string {
+	if this.visited == false {
+		this.visited = true
+		return this.Scene
+	}
+	return randStringSelection(this.Descriptions)
+}
+
 type Story struct {
 	Title              string            `yaml:"Title"`
 	Scene              string            `yaml:"Scene"`
@@ -44,9 +50,9 @@ type Story struct {
 	ItemsLocations     map[string]string `yaml:"ItemsLocations"`
 	OptionsTitle       []string          `yaml:"OptionsTitle"`
 	OptionsChooseTitle []string          `yaml:"OptionsChooseTitle"`
-	SearchOptionsTitle        []string          `yaml:"SearchOptionsTitle"`
-	SearchingTitle        []string          `yaml:"SearchingTitle"`
-	SearchChooseTitle        []string          `yaml:"SearchChooseTitle"`
+	SearchOptionsTitle []string          `yaml:"SearchOptionsTitle"`
+	SearchingTitle     []string          `yaml:"SearchingTitle"`
+	SearchFailTitle    []string          `yaml:"SearchFailTitle"`
+	SearchChooseTitle  []string          `yaml:"SearchChooseTitle"`
 	currentLocation    *Location
-	input              *bufio.Reader
 }

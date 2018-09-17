@@ -14,6 +14,9 @@ SearchOptionsTitle:
 SearchingTitle:
   - You see;
   - After a rumaging you find;
+SearchFailTitle:
+  - Nothings here.
+  - Even the trash is worthless.
 SearchChooseTitle:
   - Do you want to take anything?
   - Anything take your fancy?
@@ -43,7 +46,7 @@ Locations:
           - Looking at the bed you wonder. How did this become it?
 Items:
   - Id: hammer
-    Scene: Laying there amounts the floor trash is an old hammer think with paint from it was last used.
+    Scene: Laying there in the floor trash is an old hammer think with paint from it was last used.
     Descriptions:
       - The painted hammer.
       - The one tool ever needed, a hammer.
