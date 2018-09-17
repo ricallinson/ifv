@@ -1,6 +1,5 @@
 ---
 Title: The Bunker
-Scene: Looking around you ask yourself how did this happen to me?
 LocationStart: the bed
 OptionsTitle: 
   - Looking around you see;
@@ -20,6 +19,10 @@ SearchFailTitle:
 SearchChooseTitle:
   - Do you want to take anything?
   - Anything take your fancy?
+LocationMoveTitle: Move to somewhere else?
+ItemUseTitle: Use one of your items?
+ItemPickupTitle: Pickup an item?
+ItemPutdownTitle: Put down one of your items?
 Locations:
   - Id: the bed
     Scene: The small cot bed in the corner of the room is where you've been sleeping for as long as you can remember.
