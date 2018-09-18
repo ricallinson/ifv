@@ -63,17 +63,25 @@ func (this *Game) getLocationExits() []*LocationExit {
 	return this.userloc.Exits
 }
 
-func (this *Game) discribeItem(id string) {
-	// On the floor is an old hammer.
+func (this *Game) discribeLocationExits() {
+	exits := this.getLocationExits()
+	for _, exit := range exits {
+		this.render.String(exit.Discribe())
+	}
 }
 
 func (this *Game) discribeLocationItems() {
-	// On the floor is an old hammer. A cups sits alone.
+	items := this.getLocationItems()
+	for _, item := range items {
+		this.render.String(item.Discribe())
+	}
 }
 
 func (this *Game) discribeLocation() {
 	// You are in a room. On the floor is an old hammer. A cups sits alone.
 	this.render.String(this.userloc.Discribe())
+	this.discribeLocationItems()
+	this.discribeLocationExits()
 }
 
 // Creates the main navigation menu.
@@ -83,14 +91,14 @@ func (this *Game) menu() {
 	userItems := this.getUserItems()
 	options := []*MenuOption{}
 	if len(exits) > 0 {
-		options = append(options, &MenuOption{this.story.LocationMoveTitle, this.move})
+		options = append(options, &MenuOption{randStringSelection(this.story.LocationMoveTitle), this.move})
 	}
 	if len(locItems) > 0 {
-		options = append(options, &MenuOption{this.story.ItemPickupTitle, this.pickup})
+		options = append(options, &MenuOption{randStringSelection(this.story.ItemPickupTitle), this.pickup})
 	}
 	if len(userItems) > 0 {
-		options = append(options, &MenuOption{this.story.ItemPutdownTitle, this.putdown})
-		options = append(options, &MenuOption{this.story.ItemUseTitle, this.use})
+		options = append(options, &MenuOption{randStringSelection(this.story.ItemPutdownTitle), this.putdown})
+		options = append(options, &MenuOption{randStringSelection(this.story.ItemUseTitle), this.use})
 	}
 	this.render.String("\n")
 	for i := 0; i < len(options); i++ {

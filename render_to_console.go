@@ -8,7 +8,7 @@ type RenderToConsole struct {
 }
 
 func (this *RenderToConsole) String(s string) {
-	fmt.Print(s)
+	fmt.Print(s, " ")
 }
 
 func (this *RenderToConsole) AskForString() string {

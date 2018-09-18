@@ -14,10 +14,10 @@ type Story struct {
 	SearchingTitle     []string          `yaml:"SearchingTitle"`
 	SearchFailTitle    []string          `yaml:"SearchFailTitle"`
 	SearchChooseTitle  []string          `yaml:"SearchChooseTitle"`
-	LocationMoveTitle  string            `yaml:"LocationMoveTitle"`
-	ItemUseTitle       string            `yaml:"ItemUseTitle"`
-	ItemPickupTitle    string            `yaml:"ItemPickupTitle"`
-	ItemPutdownTitle   string            `yaml:"ItemPutdownTitle"`
+	LocationMoveTitle  []string          `yaml:"LocationMoveTitle"`
+	ItemUseTitle       []string          `yaml:"ItemUseTitle"`
+	ItemPickupTitle    []string          `yaml:"ItemPickupTitle"`
+	ItemPutdownTitle   []string          `yaml:"ItemPutdownTitle"`
 }
 
 func (this *Story) GetLocation(id string) *Location {
