@@ -18,8 +18,16 @@ func CreateRenderToBuffer() *RenderToBuffer {
 	}
 }
 
+func (this *RenderToBuffer) Section() {
+	this.stringsOutput = append(this.stringsOutput, "\n\n")
+}
+
 func (this *RenderToBuffer) String(s string) {
 	this.stringsOutput = append(this.stringsOutput, s)
+}
+
+func (this *RenderToBuffer) StringLine(s string) {
+	this.stringsOutput = append(this.stringsOutput, s+"\n")
 }
 
 func (this *RenderToBuffer) AskForString() string {
@@ -38,6 +46,10 @@ func (this *RenderToBuffer) AskForInt() int {
 	i := this.intsInput[this.intsIndex]
 	this.intsIndex++
 	return i
+}
+
+func (this *RenderToBuffer) Quit() {
+
 }
 
 func (this *RenderToBuffer) ReadIndexedString(i int) string {

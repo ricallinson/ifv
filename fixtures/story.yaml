@@ -1,33 +1,9 @@
 ---
 Title: The Bunker
 LocationStart: the bed
-OptionsTitle: 
-  - Looking around you see;
-  - Through your glazed eyes your see;
-OptionsChooseTitle: 
-  - What do you want to do?
-  - Whats next?
-SearchOptionsTitle:
-  - Do you want to look about?
-  - There might be somehting you can use here.
-SearchingTitle:
-  - You see;
-  - After a rumaging you find;
-SearchFailTitle:
-  - Nothings here.
-  - Even the trash is worthless.
-SearchChooseTitle:
-  - Do you want to take anything?
-  - Anything take your fancy?
-LocationMoveTitle: 
-  - Move to somewhere else?
-  - Move on?
-ItemUseTitle: 
-  - Use one of your items?
-ItemPickupTitle: 
-  - Pickup an item?
-ItemPutdownTitle: 
-  - Putdown one of your items?
+QuitTitle: 
+  - Exit the game?
+  - Quit out cause you're a losser?
 Locations:
   - Id: the bed
     Scene: The small cot bed in the corner of the room is where you've been sleeping for as long as you can remember.
@@ -41,6 +17,8 @@ Locations:
         Descriptions:
           - You think you've got some tolet paper stuck to your foot as you look at your kitchen.
           - You kick some paper and a cockroch runs off under the kitchen sink.
+        Options:
+          - Move to the kitchen?
   - Id: the kitchen
     Scene: A one sink, one hob mess.
     Descriptions:
@@ -52,12 +30,20 @@ Locations:
         Descriptions:
           - Past the dirty underware is the bed.
           - Looking at the bed you wonder. How did this become it?
+        Options:
+          - Go to the bed?
 Items:
   - Id: hammer
     Scene: Laying there in the floor trash is an old hammer think with paint from when it was last used.
     Descriptions:
       - A painted hammer lays there like a dead dog.
       - In the floor debriy, the one tool you'll ever needed, a hammer.
+    OptionsPickup:
+      - Pickup the hammer?
+    OptionsPutdown:
+      - Drop the hammer?
+    OptionsUse:
+      - Use the hammer?
     Success:
       - With one quick blow the hammer opens it like a it was an orange.
       - One almighty swing followed by the sound of breaking angles.

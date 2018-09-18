@@ -12,8 +12,8 @@ type Game struct {
 }
 
 type MenuOption struct {
-	Title string
-	Fn    func()
+	Title  string
+	Action func()
 }
 
 func CreateGame(p string, r Renderer) *Game {
@@ -30,13 +30,25 @@ func CreateGame(p string, r Renderer) *Game {
 }
 
 func (this *Game) Play() {
+	this.render.Section()
 	this.discribeLocation()
-	this.menu()
+	this.discribeLocationItems()
+	this.discribeLocationExits()
+	this.render.Section()
+	this.discribeOptions()
 	this.Play()
 }
 
 func (this *Game) setUserLocation(id string) {
 	this.userloc = this.story.GetLocation(id)
+}
+
+func (this *Game) pickupItem(id string) {
+	this.itemloc[id] = ""
+}
+
+func (this *Game) putdownItem(id string) {
+	this.itemloc[id] = this.userloc.Id
 }
 
 func (this *Game) getUserItems() []*Item {
@@ -78,79 +90,76 @@ func (this *Game) discribeLocationItems() {
 }
 
 func (this *Game) discribeLocation() {
-	// You are in a room. On the floor is an old hammer. A cups sits alone.
 	this.render.String(this.userloc.Discribe())
-	this.discribeLocationItems()
-	this.discribeLocationExits()
 }
 
-// Creates the main navigation menu.
-func (this *Game) menu() {
-	exits := this.getLocationExits()
-	locItems := this.getLocationItems()
-	userItems := this.getUserItems()
-	options := []*MenuOption{}
-	if len(exits) > 0 {
-		options = append(options, &MenuOption{randStringSelection(this.story.LocationMoveTitle), this.move})
+func (this *Game) discribeOptions() {
+	opts := []*MenuOption{}
+	opts = append(opts, this.createExitOptions()...)
+	opts = append(opts, this.createLocationItemOptions()...)
+	opts = append(opts, this.createUserItemOptions()...)
+	opts = append(opts, this.createGameOptions()...)
+	for i, opt := range opts {
+		this.render.StringLine(fmt.Sprintf("%d) %s", i+1, opt.Title))
 	}
-	if len(locItems) > 0 {
-		options = append(options, &MenuOption{randStringSelection(this.story.ItemPickupTitle), this.pickup})
-	}
-	if len(userItems) > 0 {
-		options = append(options, &MenuOption{randStringSelection(this.story.ItemPutdownTitle), this.putdown})
-		options = append(options, &MenuOption{randStringSelection(this.story.ItemUseTitle), this.use})
-	}
-	this.render.String("\n")
-	for i := 0; i < len(options); i++ {
-		this.render.String(fmt.Sprintf("\n%d ) %s\n", i+1, options[i].Title))
-	}
-	this.render.String("\n:")
-	choice := this.render.AskForInt()
-	if choice >= 1 && choice <= len(options) {
-		options[choice-1].Fn()
-	}
-}
-
-// Creates the move menu.
-func (this *Game) move() {
-	exits := this.getLocationExits()
-	for i, s := range exits {
-		this.render.String(fmt.Sprintf("\n%d ) %s\n", i+1, s.Id))
-	}
-	this.render.String("\n:")
 	choice := this.render.AskForInt() - 1
-	if choice < len(exits) {
-		this.setUserLocation(exits[choice].Id)
+	if choice >= 0 && choice < len(opts) {
+		opts[choice].Action()
 	}
 }
 
-// Creats the use menu.
-func (this *Game) use() {
-	this.render.String("\n\n***NOT IMPLEMENTED YET***\n\n")
+func (this *Game) createExitOptions() []*MenuOption {
+	opts := []*MenuOption{}
+	for _, exit := range this.getLocationExits() {
+		opts = append(opts, &MenuOption{
+			Title: exit.DiscribeOptions(),
+			Action: func() {
+				this.setUserLocation(exit.Id)
+			},
+		})
+	}
+	return opts
 }
 
-// Creates the pickup menu.
-func (this *Game) pickup() {
-	items := this.getLocationItems()
-	for i, s := range items {
-		this.render.String(fmt.Sprintf("\n%d ) %s\n", i+1, s.Id))
+func (this *Game) createLocationItemOptions() []*MenuOption {
+	opts := []*MenuOption{}
+	for _, item := range this.getLocationItems() {
+		opts = append(opts, &MenuOption{
+			Title: item.DiscribeOptionsPickup(),
+			Action: func() {
+				this.pickupItem(item.Id)
+			},
+		})
 	}
-	this.render.String("\n:")
-	choice := this.render.AskForInt() - 1
-	if choice < len(items) {
-		this.itemloc[items[choice].Id] = ""
-	}
+	return opts
 }
 
-// Creates the putdown menu.
-func (this *Game) putdown() {
-	items := this.getUserItems()
-	for i, s := range items {
-		this.render.String(fmt.Sprintf("\n%d ) %s\n", i+1, s.Id))
+func (this *Game) createUserItemOptions() []*MenuOption {
+	opts := []*MenuOption{}
+	for _, item := range this.getUserItems() {
+		opts = append(opts, &MenuOption{
+			Title: item.DiscribeOptionsUse(),
+			Action: func() {
+
+			},
+		})
+		opts = append(opts, &MenuOption{
+			Title: item.DiscribeOptionsPutdown(),
+			Action: func() {
+				this.putdownItem(item.Id)
+			},
+		})
 	}
-	this.render.String("\n:")
-	choice := this.render.AskForInt() - 1
-	if choice < len(items) {
-		this.itemloc[items[choice].Id] = this.userloc.Id
-	}
+	return opts
+}
+
+func (this *Game) createGameOptions() []*MenuOption {
+	opts := []*MenuOption{}
+	opts = append(opts, &MenuOption{
+		Title: this.story.DiscribeQuit(),
+		Action: func() {
+			this.render.Quit()
+		},
+	})
+	return opts
 }
