@@ -1,85 +1,86 @@
 ---
-Title: The Bunker
+Title: "The Bunker"
+Scene: "Working as a tech for a doomsday prepper you find yourself locked in his bunker."
 LocationStart:
   - bed
 LocationEnd:
   - stairs
 QuitTitle:
-  - Exit the game?
-  - Quit out cause you're a losser?
+  - "Exit the game?"
+  - "Quit out cause you're a loser?"
 Locations:
   - Id: bed
-    Scene: The small cot bed in the corner of the room is where you've been sleeping for as long as you can remember.
+    Scene: "The small cot bed in the corner of the room is where you've been sleeping for as long as you can remember."
     Descriptions:
-      - It's there, in all its gloy, your smelly bed.
-      - Good old yellow, the bed of champions.
-      - That bed of yours is one the army wouldn't even use for torture.
+      - "It's there, in all its glory, your smelly bed."
+      - "Good old yellow, the bed of champions."
+      - "That bed of yours is one the army wouldn't even use for torture."
     Exits:
       - Id: kitchen
-        Scene: Across the floor to the smell of rotten food is your kitchen.
+        Scene: "Across the floor to the smell of rotten food is your kitchen."
         Descriptions:
-          - You think you've got some tolet paper stuck to your foot as you look at your kitchen.
-          - You kick some paper and a cockroch runs off under the kitchen sink.
+          - "You think you've got some toilet paper stuck to your foot as you look at your kitchen."
+          - "You kick some paper and a cockroach runs off under the kitchen sink."
         Options:
-          - Move to the kitchen?
+          - "Move to the kitchen?"
   - Id: kitchen
-    Scene: A one sink, one hob mess.
+    Scene: "A one sink, one hob mess."
     Descriptions:
-      - A students takeaway kitchen from hell.
-      - Your kitchen equipped from the traash can of a homeless frog.
+      - "A students takeaway kitchen from hell."
+      - "Your kitchen equipped from the trash can of a homeless frog."
     Exits:
       - Id: bed
-        Scene: On the other side of the room is the place you don't want to sleep.
+        Scene: "On the other side of the room is the place you don't want to sleep."
         Descriptions:
-          - Past the dirty underware is the bed.
-          - Looking at the bed you wonder. How did this become it?
+          - "Past the dirty underwear is the bed."
+          - "Looking at the bed you wonder. How did this become it?"
         Options:
-          - Go to the bed?
+          - "Go to the bed?"
       - Id: stairs
         Hidden: true
-        Scene: As the cup smashes an small peice hits a switch on the wall behind a poster of Trump. A door opens to some stairs.
+        Scene: "As the cup smashes an small piece hits a switch on the wall behind a poster of Trump. A door opens to some stairs."
         Options:
-          - Climb the stairs?
+          - "Climb the stairs?"
   - Id: stairs
-    Scene: You climb the stairs to freedom.
+    Scene: "You climb the stairs to freedom."
 
 Items:
   - Id: cup
     Hidden: false
     Scene: A white cup.
     Descriptions:
-      - The cup.
+      - "The cup."
     OptionsPickup:
-      - Pickup the cup?
+      - "Pickup the cup?"
     OptionsPutdown:
-      - Drop the cup?
+      - "Drop the cup?"
     OptionsUse:
-      - Use the cup?
+      - "Use the cup?"
     Success:
-      - The cup explodes killing you.
+      - "The cup explodes killing you."
     Failure:
-      - The cup spins away in one intacted.
+      - "The cup spins away intact."
   - Id: hammer
     Hidden: false
-    Scene: Laying there in the floor trash is an old hammer think with paint from when it was last used.
+    Scene: "Laying there in the floor trash is an old hammer think with paint from when it was last used."
     Descriptions:
-      - A painted hammer lays there like a dead dog.
-      - In the floor debriy, the one tool you'll ever needed, a hammer.
+      - "A painted hammer lays there like a dead dog."
+      - "In the floor debris, the one tool you'll ever needed, a hammer."
     OptionsPickup:
-      - Pickup the hammer?
-      - Grab the hammer?
+      - "Pickup the hammer?"
+      - "Grab the hammer?"
     OptionsPutdown:
-      - Drop the hammer?
-      - Throw away the hammer?
-      - Bin away the hammer?
+      - "Drop the hammer?"
+      - "Throw away the hammer?"
+      - "Bin away the hammer?"
     OptionsUse:
-      - Use the hammer?
+      - "Use the hammer?"
     Success:
-      - With one quick blow the hammer smashes the cup like a it was an orange.
-      - One almighty swing followed by the sound of breaking angles and the cup shaters into a thousand parts.
+      - "With one quick blow the hammer smashes the cup like a it was an orange."
+      - "One almighty swing followed by the sound of breaking angles and the cup shatters into a thousand parts."
     Failure:
-      - The hammer bounced off and nearly embedded its self in your head.
-      - The shockway struck you body like a train but nothing happened.
+      - "The hammer bounced off and nearly embedded its self in your head."
+      - "The shock wave struck you body like a train but nothing happened."
     Conditions: # To use the item all the following conditions must be true.
       Location: 
         - kitchen
@@ -87,11 +88,11 @@ Items:
         - cup
       UserItems:
         - hammer
-    Result: # Once the item is used the following locations and items are toggeled with hidden.
+    Result: # Once the item is used the following locations and items are toggled with hidden.
       Exits: 
         - stairs
       Items:
         - cup
 ItemsLocations:
-  "hammer": bed
-  "cup": kitchen
+  hammer: bed
+  cup: kitchen

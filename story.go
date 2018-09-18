@@ -4,6 +4,7 @@ import ()
 
 type Story struct {
 	Title          string            `yaml:"Title"`
+	Scene          string            `yaml:"Scene"`
 	LocationStart  []string          `yaml:"LocationStart"`
 	LocationEnd    []string          `yaml:"LocationEnd"`
 	Locations      []*Location       `yaml:"Locations"`

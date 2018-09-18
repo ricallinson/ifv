@@ -49,18 +49,27 @@ func (this *RenderToBuffer) AskForInt() int {
 }
 
 func (this *RenderToBuffer) Quit() {
-
+	this.stringsOutput = append(this.stringsOutput, "quit")
 }
 
 func (this *RenderToBuffer) ReadIndexedString(i int) string {
-	if i < 0 || i >= len(this.stringsOutput) {
+	i = len(this.stringsOutput) - i
+	if i <= 0 || i >= len(this.stringsOutput) {
 		return ""
 	}
 	return this.stringsOutput[i]
 }
 
+func (this *RenderToBuffer) ReadLastStrings(n int) []string {
+	s := []string{}
+	for ; n > 0; n-- {
+		s = append(s, this.ReadIndexedString(n))
+	}
+	return s
+}
+
 func (this *RenderToBuffer) ReadLastString() string {
-	return this.ReadIndexedString(len(this.stringsOutput) - 1)
+	return this.ReadIndexedString(1)
 }
 
 func (this *RenderToBuffer) AddInputString(s string) {

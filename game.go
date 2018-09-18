@@ -11,6 +11,7 @@ type Game struct {
 	itemloc     map[string]string
 	itemsHidden []string
 	exitsHidden []string
+	quit        bool
 }
 
 type MenuOption struct {
@@ -40,16 +41,25 @@ func (this *Game) StoryToYaml() {
 
 func (this *Game) Play() {
 	this.render.Section()
+	this.discribeStory()
+	for !this.quit {
+		this.loop()
+	}
+	this.render.Quit()
+}
+
+func (this *Game) loop() {
+	this.render.Section()
 	if this.story.IsLocationTheEnd(this.userloc.Id) {
 		this.discribeLocation()
-		this.render.Quit()
+		this.quit = true
+		return
 	}
 	this.discribeLocation()
 	this.discribeLocationItems()
 	this.discribeLocationExits()
 	this.render.Section()
 	this.discribeOptions()
-	this.Play()
 }
 
 func (this *Game) setUserLocation(id string) {
@@ -94,6 +104,11 @@ func (this *Game) getLocationExits() []*LocationExit {
 	return exits
 }
 
+func (this *Game) discribeStory() {
+	this.render.StringLine(this.story.Title)
+	this.render.String(this.story.Scene)
+}
+
 func (this *Game) discribeLocationExits() {
 	exits := this.getLocationExits()
 	for _, exit := range exits {
@@ -121,9 +136,14 @@ func (this *Game) discribeOptions() {
 	for i, opt := range opts {
 		this.render.StringLine(fmt.Sprintf("%d) %s", i+1, opt.Title))
 	}
-	choice := this.render.AskForInt() - 1
-	if choice >= 0 && choice < len(opts) {
-		opts[choice].Action()
+	this.render.StringLine(fmt.Sprintf("%d) %s", 0, this.story.DiscribeQuit()))
+	choice := this.render.AskForInt()
+	if choice == 0 {
+		this.quit = true
+		return
+	}
+	if choice > 0 && choice <= len(opts) {
+		opts[choice-1].Action()
 	}
 }
 
@@ -165,7 +185,7 @@ func (this *Game) createUserItemOptions() []*MenuOption {
 			Title: item.DiscribeOptionsUse(),
 			Action: func() {
 				var s string
-				if item.Conditions.Test(this.userloc, this.getLocationItems(), this.getUserItems()) {
+				if item.Test(this.userloc, this.getLocationItems(), this.getUserItems()) {
 					this.executeResult(item.Result.Exits, item.Result.Items)
 					s = item.DiscribeSuccess()
 				} else {
@@ -186,11 +206,5 @@ func (this *Game) createUserItemOptions() []*MenuOption {
 
 func (this *Game) createGameOptions() []*MenuOption {
 	opts := []*MenuOption{}
-	opts = append(opts, &MenuOption{
-		Title: this.story.DiscribeQuit(),
-		Action: func() {
-			this.render.Quit()
-		},
-	})
 	return opts
 }

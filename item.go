@@ -1,8 +1,6 @@
 package main
 
-import (
-	"fmt"
-)
+import ()
 
 type Result struct {
 	Exits []string `yaml:"Exits"`
@@ -13,24 +11,6 @@ type Conditions struct {
 	Location      []string `yaml:"Location"`
 	LocationItems []string `yaml:"LocationItems"`
 	UserItems     []string `yaml:"UserItems"`
-}
-
-func (this *Conditions) Test(loc *Location, locItems []*Item, userItems []*Item) bool {
-	test := 0
-	if containsString(this.Location, loc.Id) {
-		test++
-	}
-	if containsItem(locItems, this.LocationItems) {
-		test++
-	}
-	if containsItem(userItems, this.UserItems) {
-		test++
-	}
-	fmt.Println(test)
-	if test < 3 {
-		return false
-	}
-	return true
 }
 
 type Item struct {
@@ -54,6 +34,26 @@ func (this *Item) Discribe() string {
 		return this.Scene
 	}
 	return randStringSelection(this.Descriptions)
+}
+
+func (this *Item) Test(loc *Location, locItems []*Item, userItems []*Item) bool {
+	if this.Conditions == nil {
+		return false
+	}
+	test := 0
+	if containsString(this.Conditions.Location, loc.Id) {
+		test++
+	}
+	if containsItem(locItems, this.Conditions.LocationItems) {
+		test++
+	}
+	if containsItem(userItems, this.Conditions.UserItems) {
+		test++
+	}
+	if test < 3 {
+		return false
+	}
+	return true
 }
 
 func (this *Item) DiscribeOptionsUse() string {
