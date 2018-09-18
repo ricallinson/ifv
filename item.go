@@ -5,8 +5,8 @@ import (
 )
 
 type Result struct {
-	Location []string `yaml:"Location"`
-	Items    []string `yaml:"Items"`
+	Exits []string `yaml:"Location"`
+	Items []string `yaml:"Items"`
 }
 
 type Conditions struct {

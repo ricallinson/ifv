@@ -31,14 +31,11 @@ func CreateGame(p string, r Renderer) *Game {
 	this.itemHidden = this.story.GetHiddenItems()
 	this.exitHidden = this.story.GetHiddenExits()
 	// Validate game data here.
-
-	// Dump YAML
-	fmt.Println(string(interfaceToYaml(this.story)))
-	// Debug
-	fmt.Println("items", this.itemloc)
-	fmt.Println("hidden", this.itemHidden)
-	fmt.Println("locHidden", this.exitHidden)
 	return this
+}
+
+func (this *Game) StoryToYaml() {
+	fmt.Println(string(interfaceToYaml(this.story)))
 }
 
 func (this *Game) Play() {
@@ -130,6 +127,10 @@ func (this *Game) discribeOptions() {
 	}
 }
 
+func (this *Game) executeResult(exits []string, items []string) {
+	// Toggle values
+}
+
 func (this *Game) createExitOptions() []*MenuOption {
 	opts := []*MenuOption{}
 	for _, exit := range this.getLocationExits() {
@@ -166,6 +167,7 @@ func (this *Game) createUserItemOptions() []*MenuOption {
 			Action: func() {
 				var s string
 				if item.Conditions.Test(this.userloc, this.getLocationItems(), this.getUserItems()) {
+					this.executeResult(item.Result.Exits, item.Result.Items)
 					s = item.DiscribeSuccess()
 				} else {
 					s = item.DiscribeFailure()

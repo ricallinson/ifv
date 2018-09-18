@@ -84,7 +84,7 @@ Items:
       UserItems:
         - hammer
     Result: # Once the item is used the following locations and items are toggeled with hidden.
-      Location: 
+      Exits: 
         - stairs
       Items:
         - cup
