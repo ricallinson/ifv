@@ -20,7 +20,7 @@ The game should now be running and you can play it by entering an option number 
 
 ## Usage
 
-The game interface is currently text based. It will print out some of the story and when wait for a choice to be made. To make a choice enter the number of the option you want and then press the enter key. This will repeat until the game completes or is exited.
+The game interface is currently text based. It will print out some of the story and then wait for a choice to be input. To make a choice enter the number of the option you want and then press the enter key. This will repeat until the game completes or is exited.
 
 ### story (required)
 
@@ -35,6 +35,8 @@ A story is represented in a [YAML](http://yaml.org/) file. An example of which c
 Unfortunately there are no instructions for how the YAML file is constructed at the moment. It is reasonably straight forward and I encourage reverse engineering it as an interim until the manual is written.
 
 You can make a copy of the YAML file and change it in a text editor. Once changed you'll need to reload the game program with `-story` being the path to your edited file.
+
+	ifv -story /path/to/edited/story.yaml
 
 ## Coding Development Environment
 
