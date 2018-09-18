@@ -18,6 +18,10 @@ You should now see your command line interface. From here you will install the p
 
 The game should now be running and you can play it by entering an option number and pressing enter.
 
+For subsequent uses you only need to start the program. No need to install it again.
+
+	ifv -story $GOPATH/src/github.com/ricallinson/ifv/fixtures/story.yaml
+
 ## Usage
 
 The game interface is currently text based. It will print out some of the story and then wait for a choice to be input. To make a choice enter the number of the option you want and then press the enter key. This will repeat until the game completes or is exited.
