@@ -1,31 +1,31 @@
 ---
 Title: The Bunker
-LocationStart: the bed
+LocationStart: bed
 QuitTitle: 
   - Exit the game?
   - Quit out cause you're a losser?
 Locations:
-  - Id: the bed
+  - Id: bed
     Scene: The small cot bed in the corner of the room is where you've been sleeping for as long as you can remember.
     Descriptions:
       - It's there, in all its gloy, your smelly bed.
       - Good old yellow, the bed of champions.
       - That bed of yours is one the army wouldn't even use for torture.
     Exits:
-      - Id: the kitchen
+      - Id: kitchen
         Scene: Across the floor to the smell of rotten food is your kitchen.
         Descriptions:
           - You think you've got some tolet paper stuck to your foot as you look at your kitchen.
           - You kick some paper and a cockroch runs off under the kitchen sink.
         Options:
           - Move to the kitchen?
-  - Id: the kitchen
+  - Id: kitchen
     Scene: A one sink, one hob mess.
     Descriptions:
       - A students takeaway kitchen from hell.
       - Your kitchen equipped from the traash can of a homeless frog.
     Exits:
-      - Id: the bed
+      - Id: bed
         Scene: On the other side of the room is the place you don't want to sleep.
         Descriptions:
           - Past the dirty underware is the bed.
@@ -33,6 +33,20 @@ Locations:
         Options:
           - Go to the bed?
 Items:
+  - Id: cup
+    Scene: A white cup.
+    Descriptions:
+      - The cup.
+    OptionsPickup:
+      - Pickup the cup?
+    OptionsPutdown:
+      - Drop the cup?
+    OptionsUse:
+      - Use the cup?
+    Success:
+      - The cup explodes killing you.
+    Failure:
+      - The cup spins away in one intacted.
   - Id: hammer
     Scene: Laying there in the floor trash is an old hammer think with paint from when it was last used.
     Descriptions:
@@ -40,15 +54,26 @@ Items:
       - In the floor debriy, the one tool you'll ever needed, a hammer.
     OptionsPickup:
       - Pickup the hammer?
+      - Grab the hammer?
     OptionsPutdown:
       - Drop the hammer?
+      - Throw away the hammer?
+      - Bin away the hammer?
     OptionsUse:
       - Use the hammer?
     Success:
-      - With one quick blow the hammer opens it like a it was an orange.
-      - One almighty swing followed by the sound of breaking angles.
+      - With one quick blow the hammer smashes the cup like a it was an orange.
+      - One almighty swing followed by the sound of breaking angles and the cup shaters into a thousand parts.
     Failure:
       - The hammer bounced off and nearly embedded its self in your head.
       - The shockway struck you body like a train but nothing happened.
+    Conditions: # To use the item all the following conditions must be true.
+      Location: 
+        - kitchen
+      LocationItems:
+        - cup
+      UserItems:
+        - hammer
 ItemsLocations:
-  "hammer": the kitchen
+  "hammer": bed
+  "cup": kitchen

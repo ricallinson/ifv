@@ -26,6 +26,7 @@ func CreateGame(p string, r Renderer) *Game {
 	for k, v := range this.story.ItemsLocations {
 		this.itemloc[k] = v
 	}
+	// Validate game data.
 	return this
 }
 
@@ -140,7 +141,13 @@ func (this *Game) createUserItemOptions() []*MenuOption {
 		opts = append(opts, &MenuOption{
 			Title: item.DiscribeOptionsUse(),
 			Action: func() {
-
+				var s string
+				if item.Conditions.Test(this.userloc, this.getLocationItems(), this.getUserItems()) {
+					s = item.DiscribeSuccess()
+				} else {
+					s = item.DiscribeFailure()
+				}
+				this.render.String(s)
 			},
 		})
 		opts = append(opts, &MenuOption{

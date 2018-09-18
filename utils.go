@@ -12,6 +12,28 @@ func randStringSelection(s []string) string {
 	return s[i]
 }
 
+func containsString(a []string, b []string) bool {
+	for _, av := range a {
+		for _, bv := range b {
+			if av == bv {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+func containsItem(a []string, b []*Item) bool {
+	for _, av := range a {
+		for _, bv := range b {
+			if av == bv.Id {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 // Reads a file into a byte array or exits.
 func readFileToByteArray(p string) []byte {
 	b, err := ioutil.ReadFile(p)
