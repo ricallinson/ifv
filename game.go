@@ -11,13 +11,18 @@ type Game struct {
 	itemloc map[string]string
 }
 
+type MenuOption struct {
+	Title string
+	Fn    func()
+}
+
 func CreateGame(p string, r Renderer) *Game {
 	this := &Game{
 		story:   readYamlFileToStory(p),
 		render:  r,
 		itemloc: map[string]string{},
 	}
-	this.userloc = this.story.GetLocation(this.story.LocationStart)
+	this.setUserLocation(this.story.LocationStart)
 	for k, v := range this.story.ItemsLocations {
 		this.itemloc[k] = v
 	}
@@ -28,6 +33,10 @@ func (this *Game) Play() {
 	this.discribeLocation()
 	this.menu()
 	this.Play()
+}
+
+func (this *Game) setUserLocation(id string) {
+	this.userloc = this.story.GetLocation(id)
 }
 
 func (this *Game) getUserItems() []*Item {
@@ -67,37 +76,34 @@ func (this *Game) discribeLocation() {
 	this.render.String(this.userloc.Discribe())
 }
 
+// Creates the main navigation menu.
 func (this *Game) menu() {
 	exits := this.getLocationExits()
 	locItems := this.getLocationItems()
 	userItems := this.getUserItems()
-	options := map[string]func(){}
+	options := []*MenuOption{}
 	if len(exits) > 0 {
-		options[this.story.LocationMoveTitle] = this.move
+		options = append(options, &MenuOption{this.story.LocationMoveTitle, this.move})
 	}
 	if len(locItems) > 0 {
-		options[this.story.ItemPickupTitle] = this.pickup
+		options = append(options, &MenuOption{this.story.ItemPickupTitle, this.pickup})
 	}
 	if len(userItems) > 0 {
-		options[this.story.ItemPutdownTitle] = this.putdown
-		options[this.story.ItemUseTitle] = this.use
+		options = append(options, &MenuOption{this.story.ItemPutdownTitle, this.putdown})
+		options = append(options, &MenuOption{this.story.ItemUseTitle, this.use})
 	}
-	i := 1
 	this.render.String("\n")
-	for s, _ := range options {
-		this.render.String(fmt.Sprintf("\n%d ) %s\n", i, s))
-		i++
+	for i := 0; i < len(options); i++ {
+		this.render.String(fmt.Sprintf("\n%d ) %s\n", i+1, options[i].Title))
 	}
 	this.render.String("\n:")
 	choice := this.render.AskForInt()
-	for _, fn := range options {
-		choice--
-		if choice == 0 {
-			fn()
-		}
+	if choice >= 1 && choice <= len(options) {
+		options[choice-1].Fn()
 	}
 }
 
+// Creates the move menu.
 func (this *Game) move() {
 	exits := this.getLocationExits()
 	for i, s := range exits {
@@ -106,27 +112,37 @@ func (this *Game) move() {
 	this.render.String("\n:")
 	choice := this.render.AskForInt() - 1
 	if choice < len(exits) {
-		this.userloc = this.story.GetLocation(exits[choice].Id)
+		this.setUserLocation(exits[choice].Id)
 	}
 }
 
+// Creats the use menu.
 func (this *Game) use() {
-	// 1) Dog
-	// 2) Cup
-	// 3) Cancel
-	this.render.String("\n\nUse")
+	this.render.String("\n\n***NOT IMPLEMENTED YET***\n\n")
 }
 
+// Creates the pickup menu.
 func (this *Game) pickup() {
-	// 1) Hammer
-	// 2) Cup
-	// 3) Cancel
-	this.render.String("\n\nPickup")
+	items := this.getLocationItems()
+	for i, s := range items {
+		this.render.String(fmt.Sprintf("\n%d ) %s\n", i+1, s.Id))
+	}
+	this.render.String("\n:")
+	choice := this.render.AskForInt() - 1
+	if choice < len(items) {
+		this.itemloc[items[choice].Id] = ""
+	}
 }
 
+// Creates the putdown menu.
 func (this *Game) putdown() {
-	// 1) Dog
-	// 2) Cup
-	// 3) Cancel
-	this.render.String("\n\nPutdown")
+	items := this.getUserItems()
+	for i, s := range items {
+		this.render.String(fmt.Sprintf("\n%d ) %s\n", i+1, s.Id))
+	}
+	this.render.String("\n:")
+	choice := this.render.AskForInt() - 1
+	if choice < len(items) {
+		this.itemloc[items[choice].Id] = this.userloc.Id
+	}
 }
