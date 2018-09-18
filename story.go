@@ -3,21 +3,26 @@ package main
 import ()
 
 type Story struct {
-	Title           string            `yaml:"Title"`
-	LocationStart   []string          `yaml:"LocationStart"`
-	LocationExitEnd []string          `yaml:"LocationExitEnd"`
-	Locations       []*Location       `yaml:"Locations"`
-	Items           []*Item           `yaml:"Items"`
-	ItemsLocations  map[string]string `yaml:"ItemsLocations"`
-	QuitTitle       []string          `yaml:"QuitTitle"`
+	Title          string            `yaml:"Title"`
+	LocationStart  []string          `yaml:"LocationStart"`
+	LocationEnd    []string          `yaml:"LocationEnd"`
+	Locations      []*Location       `yaml:"Locations"`
+	Items          []*Item           `yaml:"Items"`
+	ItemsLocations map[string]string `yaml:"ItemsLocations"`
+	QuitTitle      []string          `yaml:"QuitTitle"`
+}
+
+func CreateStory(p string) *Story {
+	this := readYamlFileToStory(p)
+	return this
 }
 
 func (this *Story) GetStartLocation() *Location {
 	return this.GetLocation(randStringSelection(this.LocationStart))
 }
 
-func (this *Story) IsLocationExitEnd(id string) bool {
-	return containsString([]string{id}, this.LocationExitEnd)
+func (this *Story) IsLocationTheEnd(locId string) bool {
+	return containsString(this.LocationEnd, locId)
 }
 
 func (this *Story) GetItemLocations() map[string]string {

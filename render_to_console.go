@@ -33,5 +33,6 @@ func (this *RenderToConsole) AskForInt() int {
 }
 
 func (this *RenderToConsole) Quit() {
+	fmt.Print("\n\n")
 	os.Exit(0)
 }

@@ -5,7 +5,7 @@ import (
 )
 
 type Result struct {
-	Exits []string `yaml:"Location"`
+	Exits []string `yaml:"Exits"`
 	Items []string `yaml:"Items"`
 }
 
@@ -17,7 +17,7 @@ type Conditions struct {
 
 func (this *Conditions) Test(loc *Location, locItems []*Item, userItems []*Item) bool {
 	test := 0
-	if containsString([]string{loc.Id}, this.Location) {
+	if containsString(this.Location, loc.Id) {
 		test++
 	}
 	if containsItem(locItems, this.LocationItems) {

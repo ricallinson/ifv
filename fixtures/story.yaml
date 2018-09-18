@@ -2,7 +2,7 @@
 Title: The Bunker
 LocationStart:
   - bed
-LocationExitEnd:
+LocationEnd:
   - stairs
 QuitTitle:
   - Exit the game?
@@ -37,7 +37,11 @@ Locations:
           - Go to the bed?
       - Id: stairs
         Hidden: true
-        Scene: As the cup smashes an small peice hits a switch on the wall behind a poster of Trump. A door opens to some stairs and escape.
+        Scene: As the cup smashes an small peice hits a switch on the wall behind a poster of Trump. A door opens to some stairs.
+        Options:
+          - Climb the stairs?
+  - Id: stairs
+    Scene: You climb the stairs to freedom.
 
 Items:
   - Id: cup
