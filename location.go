@@ -4,6 +4,7 @@ import ()
 
 type LocationExit struct {
 	Id           string   `yaml:"Id"`
+	Hidden       bool     `yaml:"Hidden"`
 	Scene        string   `yaml:"Scene"`
 	Descriptions []string `yaml:"Descriptions"`
 	Options      []string `yaml:"Options"`

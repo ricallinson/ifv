@@ -4,6 +4,11 @@ import (
 	"fmt"
 )
 
+type Result struct {
+	Location []string `yaml:"Location"`
+	Items    []string `yaml:"Items"`
+}
+
 type Conditions struct {
 	Location      []string `yaml:"Location"`
 	LocationItems []string `yaml:"LocationItems"`
@@ -12,13 +17,13 @@ type Conditions struct {
 
 func (this *Conditions) Test(loc *Location, locItems []*Item, userItems []*Item) bool {
 	test := 0
-	if containsString(this.Location, []string{loc.Id}) {
+	if containsString([]string{loc.Id}, this.Location) {
 		test++
 	}
-	if containsItem(this.LocationItems, locItems) {
+	if containsItem(locItems, this.LocationItems) {
 		test++
 	}
-	if containsItem(this.UserItems, userItems) {
+	if containsItem(userItems, this.UserItems) {
 		test++
 	}
 	fmt.Println(test)
@@ -30,6 +35,7 @@ func (this *Conditions) Test(loc *Location, locItems []*Item, userItems []*Item)
 
 type Item struct {
 	Id             string      `yaml:"Id"`
+	Hidden         bool        `yaml:"Hidden"`
 	Scene          string      `yaml:"Scene"`
 	Descriptions   []string    `yaml:"Descriptions"`
 	OptionsUse     []string    `yaml:"OptionsUse"`
@@ -38,6 +44,7 @@ type Item struct {
 	Success        []string    `yaml:"Success"`
 	Failure        []string    `yaml:"Failure"`
 	Conditions     *Conditions `yaml:"Conditions"`
+	Result         *Result     `yaml:"Result"`
 	visited        bool
 }
 

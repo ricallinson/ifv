@@ -5,10 +5,12 @@ import (
 )
 
 type Game struct {
-	story   *Story
-	render  Renderer
-	userloc *Location
-	itemloc map[string]string
+	story      *Story
+	render     Renderer
+	userloc    *Location
+	itemloc    map[string]string
+	itemHidden []string
+	exitHidden []string
 }
 
 type MenuOption struct {
@@ -18,21 +20,34 @@ type MenuOption struct {
 
 func CreateGame(p string, r Renderer) *Game {
 	this := &Game{
-		story:   readYamlFileToStory(p),
-		render:  r,
-		itemloc: map[string]string{},
+		story:      readYamlFileToStory(p),
+		render:     r,
+		itemloc:    map[string]string{},
+		itemHidden: []string{},
+		exitHidden: []string{},
 	}
-	this.setUserLocation(this.story.LocationStart)
-	for k, v := range this.story.ItemsLocations {
-		this.itemloc[k] = v
-	}
-	// Validate game data.
+	this.userloc = this.story.GetStartLocation()
+	this.itemloc = this.story.GetItemLocations()
+	this.itemHidden = this.story.GetHiddenItems()
+	this.exitHidden = this.story.GetHiddenExits()
+	// Validate game data here.
+
+	// Dump YAML
+	fmt.Println(string(interfaceToYaml(this.story)))
+	// Debug
+	fmt.Println("items", this.itemloc)
+	fmt.Println("hidden", this.itemHidden)
+	fmt.Println("locHidden", this.exitHidden)
 	return this
 }
 
 func (this *Game) Play() {
 	this.render.Section()
 	this.discribeLocation()
+	if this.story.IsLocationExitEnd(this.userloc.Id) {
+		this.discribeLocationExits()
+		this.render.Quit()
+	}
 	this.discribeLocationItems()
 	this.discribeLocationExits()
 	this.render.Section()
@@ -55,7 +70,7 @@ func (this *Game) putdownItem(id string) {
 func (this *Game) getUserItems() []*Item {
 	items := []*Item{}
 	for itemId, loc := range this.itemloc {
-		if loc == "" {
+		if loc == "" && !containsString([]string{itemId}, this.itemHidden) {
 			items = append(items, this.story.GetItem(itemId))
 		}
 	}
@@ -65,7 +80,7 @@ func (this *Game) getUserItems() []*Item {
 func (this *Game) getLocationItems() []*Item {
 	items := []*Item{}
 	for itemId, loc := range this.itemloc {
-		if loc == this.userloc.Id {
+		if loc == this.userloc.Id && !containsString([]string{itemId}, this.itemHidden) {
 			items = append(items, this.story.GetItem(itemId))
 		}
 	}
@@ -73,7 +88,13 @@ func (this *Game) getLocationItems() []*Item {
 }
 
 func (this *Game) getLocationExits() []*LocationExit {
-	return this.userloc.Exits
+	exits := []*LocationExit{}
+	for _, exit := range this.userloc.Exits {
+		if !containsString([]string{exit.Id}, this.exitHidden) {
+			exits = append(exits, exit)
+		}
+	}
+	return exits
 }
 
 func (this *Game) discribeLocationExits() {
@@ -112,12 +133,14 @@ func (this *Game) discribeOptions() {
 func (this *Game) createExitOptions() []*MenuOption {
 	opts := []*MenuOption{}
 	for _, exit := range this.getLocationExits() {
-		opts = append(opts, &MenuOption{
-			Title: exit.DiscribeOptions(),
-			Action: func() {
-				this.setUserLocation(exit.Id)
-			},
-		})
+		if exit.Hidden == false {
+			opts = append(opts, &MenuOption{
+				Title: exit.DiscribeOptions(),
+				Action: func() {
+					this.setUserLocation(exit.Id)
+				},
+			})
+		}
 	}
 	return opts
 }

@@ -1,7 +1,10 @@
 ---
 Title: The Bunker
-LocationStart: bed
-QuitTitle: 
+LocationStart:
+  - bed
+LocationExitEnd:
+  - stairs
+QuitTitle:
   - Exit the game?
   - Quit out cause you're a losser?
 Locations:
@@ -32,8 +35,13 @@ Locations:
           - Looking at the bed you wonder. How did this become it?
         Options:
           - Go to the bed?
+      - Id: stairs
+        Hidden: true
+        Scene: As the cup smashes an small peice hits a switch on the wall behind a poster of Trump. A door opens to some stairs and escape.
+
 Items:
   - Id: cup
+    Hidden: false
     Scene: A white cup.
     Descriptions:
       - The cup.
@@ -48,6 +56,7 @@ Items:
     Failure:
       - The cup spins away in one intacted.
   - Id: hammer
+    Hidden: false
     Scene: Laying there in the floor trash is an old hammer think with paint from when it was last used.
     Descriptions:
       - A painted hammer lays there like a dead dog.
@@ -74,6 +83,11 @@ Items:
         - cup
       UserItems:
         - hammer
+    Result: # Once the item is used the following locations and items are toggeled with hidden.
+      Location: 
+        - stairs
+      Items:
+        - cup
 ItemsLocations:
   "hammer": bed
   "cup": kitchen

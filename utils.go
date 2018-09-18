@@ -23,10 +23,10 @@ func containsString(a []string, b []string) bool {
 	return false
 }
 
-func containsItem(a []string, b []*Item) bool {
+func containsItem(a []*Item, b []string) bool {
 	for _, av := range a {
 		for _, bv := range b {
-			if av == bv.Id {
+			if av.Id == bv {
 				return true
 			}
 		}
