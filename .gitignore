@@ -1,0 +1,9 @@
+# Coverage directory
+coverage.*
+count.*
+
+# OSX system files
+.DS_Store
+
+# Local Builds
+ifv
