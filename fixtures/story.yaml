@@ -1,13 +1,32 @@
 ---
+# The title of the story. This is shown once at the beginning of the game.
 Title: "The Bunker"
+
+# Scene's are only shown once the first time they are encountered.
+# This where you should add the most descriptive text to describe your stories beginning.
 Scene: "For as long as you remember you wanted to be a tech for a doomsday-prepper. Has it happened? You're not sure how long you've been in there but today is the day you get out."
+
+# A list of location start points.
+# There must be at least one.
+# If you want your story to randomly start in other locations add them to this list.
 LocationStart:
   - bed
+
+# A list of location end points.
+# There must be at least one.
+# You can have your story end in other locations by adding them to this list.
 LocationEnd:
   - stairs
+
+# The text used to invite the player to exit the game.
+# There must be at least one.
+# This text is show at the end of all available options presented to the user. The more you add the more the less the game will feel repetitive.
 QuitTitle:
   - "End it all now, quick and easy with a spoon to the eyeball?"
   - "You can't take it any more? Hang yourself with an old sock?"
+
+# Locations are the main building block of the game universe.
+# There must be at least two. One for "LocationStart" and one for "LocationEnd". They cannot be the same.
 Locations:
   - Id: bed
     Scene: "There's a small cot bed in the corner of the room. This is where you've been sleeping for as long as you can remember. And it smells like it too."
