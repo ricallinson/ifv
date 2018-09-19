@@ -1,86 +1,86 @@
 ---
 Title: "The Bunker"
-Scene: "Working as a tech for a doomsday prepper you find yourself locked in his bunker."
+Scene: "For as long as you remember you wanted to be a tech for a doomsday-prepper. Has it happened? You're not sure how long you've been in there but today is the day you get out."
 LocationStart:
   - bed
 LocationEnd:
   - stairs
 QuitTitle:
-  - "Exit the game?"
-  - "Quit out cause you're a loser?"
+  - "End it all now, quick and easy with a spoon to the eyeball?"
+  - "You can't take it any more? Hang yourself with an old sock?"
 Locations:
   - Id: bed
-    Scene: "The small cot bed in the corner of the room is where you've been sleeping for as long as you can remember."
+    Scene: "There's a small cot bed in the corner of the room. This is where you've been sleeping for as long as you can remember. And it smells like it too."
     Descriptions:
-      - "It's there, in all its glory, your smelly bed."
-      - "Good old yellow, the bed of champions."
-      - "That bed of yours is one the army wouldn't even use for torture."
+      - "It's still there, in all its glory, your smelly dirty bed."
+      - "Good old yellow sheets, the bed of champions today."
+      - "Your bed, if you could compare, is one the CIA wouldn't even stoop to use for torture."
     Exits:
       - Id: kitchen
-        Scene: "Across the floor to the smell of rotten food is your kitchen."
+        Scene: "About 2 feet away over a floor that smells of rotten food is your kitchen. Not a pretty sight. The water ran out some time ago so nothings been washed in a while."
         Descriptions:
-          - "You think you've got some toilet paper stuck to your foot as you look at your kitchen."
-          - "You kick some paper and a cockroach runs off under the kitchen sink."
+          - "You smell something! Looking at your feet you think you've got some toilet paper stuck to your foot. It's not. You look at your kitchen and wonder what you've been eating."
+          - "Looking at the kitchen counter you see cockroach run off under the sink. Dam things can survive anywhere."
         Options:
-          - "Move to the kitchen?"
+          - "Step over to the kitchen?"
+          - "Move to the sink?"
   - Id: kitchen
-    Scene: "A one sink, one hob mess."
+    Scene: "It's not really a kitchen by human standards. A bowl for at sink and a propane camping stove sitting on a foldout painters table. You remember the bunkers from all the doomsday-prepper shows. They are not the same."
     Descriptions:
-      - "A students takeaway kitchen from hell."
-      - "Your kitchen equipped from the trash can of a homeless frog."
+      - "That's students kitchen from hell has not changed. How  did it get this bad?"
+      - "You realize the kitchen is equipped from the trash can of a homeless frog."
     Exits:
       - Id: bed
-        Scene: "On the other side of the room is the place you don't want to sleep."
+        Scene: "Behind you the smell of your bed is inescapable. On the other side of the room is the place you don't want to sleep again."
         Descriptions:
-          - "Past the dirty underwear is the bed."
-          - "Looking at the bed you wonder. How did this become it?"
+          - "Looking down, past the floor of dirty underwear, is your camp bed."
+          - "Looking at the bed you wonder, is this how I'll end?'."
         Options:
-          - "Go to the bed?"
+          - "Hold your nose and go to the bed?"
       - Id: stairs
         Hidden: true
-        Scene: "As the cup smashes an small piece hits a switch on the wall behind a poster of Trump. A door opens to some stairs."
+        Scene: "As the cup smashes a small piece vandalizes a poster of Trump above the wash bowl. There's a click and red glow appears from Trumps forehead. The poster falls to the floor revealing a glowing switch. The wall to your left slips away into the underwear floor and is replaced by some stairs heading up into darkness."
         Options:
-          - "Climb the stairs?"
+          - "Hold your personal parts and climb the stairs?"
   - Id: stairs
-    Scene: "You climb the stairs to freedom."
+    Scene: "At the top of the dimly stairs you can just make out a handle. You reach for it, holding your breath you pull down on the latch. Bright light seers in filling the small bunker like a nightclub at closing time. Your mum is standing there with a puzzled face. She asks; I thought you went to school this morning? Have you been in the basement all day?"
 
 Items:
   - Id: cup
     Hidden: false
-    Scene: A white cup.
+    Scene: "On the folding kitchen table is a white porcelain cup filled with mold."
     Descriptions:
-      - "The cup."
+      - "That mold ridden cup is still about. It's not going anywhere unless something is done about it."
     OptionsPickup:
-      - "Pickup the cup?"
+      - "Pickup the mold to get the cup?"
     OptionsPutdown:
       - "Drop the cup?"
     OptionsUse:
-      - "Use the cup?"
-    Success:
-      - "The cup explodes killing you."
+      - "Throw the cup in anger?"
     Failure:
-      - "The cup spins away intact."
+      - "The cup bounces and spins away intact. Held together by the super mold."
   - Id: hammer
     Hidden: false
-    Scene: "Laying there in the floor trash is an old hammer think with paint from when it was last used."
+    Scene: "Laying there in the floor trash is an old hammer think with paint from when it was last abused."
     Descriptions:
-      - "A painted hammer lays there like a dead dog."
-      - "In the floor debris, the one tool you'll ever needed, a hammer."
+      - "You stub your toe on the painted hammer. It lays there like a dead dog made of a steel hammer."
+      - "The one tool you'd ever needed lays amounts the floor debris. You ask yourself, who paints with a hammer?"
     OptionsPickup:
       - "Pickup the hammer?"
-      - "Grab the hammer?"
+      - "Bend down and grab the hammer?"
     OptionsPutdown:
       - "Drop the hammer?"
       - "Throw away the hammer?"
-      - "Bin away the hammer?"
+      - "Bin the hammer?"
     OptionsUse:
       - "Use the hammer?"
+      - "Hammer for smash. You smash?"
     Success:
-      - "With one quick blow the hammer smashes the cup like a it was an orange."
-      - "One almighty swing followed by the sound of breaking angles and the cup shatters into a thousand parts."
+      - "With one quick blow the hammer smashes through the mold and engages the cup. White porcelain is flung in all directions."
+      - "One almighty swing followed by the sound of breaking angles. The cup shatters into a thousand parts flying into the dark reaches of the bunker."
     Failure:
-      - "The hammer bounced off and nearly embedded its self in your head."
-      - "The shock wave struck you body like a train but nothing happened."
+      - "The hammer bounces off and nearly embeds its self in your ear."
+      - "The shock wave struck you body like a train. The only thing that happen was a little bit of pee coming out."
     Conditions: # To use the item all the following conditions must be true.
       Location: 
         - kitchen

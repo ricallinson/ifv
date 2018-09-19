@@ -191,6 +191,7 @@ func (this *Game) createUserItemOptions() []*MenuOption {
 				} else {
 					s = item.DiscribeFailure()
 				}
+				this.render.Section()
 				this.render.String(s)
 			},
 		})
