@@ -106,6 +106,7 @@ func (this *Game) getLocationExits() []*LocationExit {
 
 func (this *Game) discribeStory() {
 	this.render.StringLine(this.story.Title)
+	this.render.Section()
 	this.render.String(this.story.Scene)
 }
 
