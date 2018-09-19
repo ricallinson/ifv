@@ -27,13 +27,13 @@ Locations:
   - Id: kitchen
     Scene: "It's not really a kitchen by human standards. A bowl for at sink and a propane camping stove sitting on a foldout painters table. You remember the bunkers from all the doomsday-prepper shows. They are not the same."
     Descriptions:
-      - "That's students kitchen from hell has not changed. How  did it get this bad?"
+      - "That's students kitchen from hell has not changed. How did it get this bad?"
       - "You realize the kitchen is equipped from the trash can of a homeless frog."
     Exits:
       - Id: bed
         Scene: "Behind you the smell of your bed is inescapable. On the other side of the room is the place you don't want to sleep again."
         Descriptions:
-          - "Looking down, past the floor of dirty underwear, is your camp bed."
+          - "Looking down, past the floor of dirty underwear, is your ripening camp bed."
           - "Looking at the bed you wonder, is this how I'll end?'."
         Options:
           - "Hold your nose and go to the bed?"
@@ -58,7 +58,7 @@ Items:
     OptionsUse:
       - "Throw the cup in anger?"
     Failure:
-      - "The cup bounces and spins away intact. Held together by the super mold."
+      - "The cup bounces and spins away intact. Held together by the super mold. You pick it up in dismay."
   - Id: hammer
     Hidden: false
     Scene: "Laying there in the floor trash is an old hammer think with paint from when it was last abused."
@@ -79,7 +79,7 @@ Items:
       - "With one quick blow the hammer smashes through the mold and engages the cup. White porcelain is flung in all directions."
       - "One almighty swing followed by the sound of breaking angles. The cup shatters into a thousand parts flying into the dark reaches of the bunker."
     Failure:
-      - "The hammer bounces off and nearly embeds its self in your ear."
+      - "The hammer bounces off its intended target and nearly embeds its self in your ear."
       - "The shock wave struck you body like a train. The only thing that happen was a little bit of pee coming out."
     Conditions: # To use the item all the following conditions must be true.
       Location: 
