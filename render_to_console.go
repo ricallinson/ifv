@@ -8,6 +8,11 @@ import (
 type RenderToConsole struct {
 }
 
+func CreateRenderToConsole() *RenderToConsole {
+	this := &RenderToConsole{}
+	return this
+}
+
 func (this *RenderToConsole) Section() {
 	fmt.Print("\n\n")
 }
