@@ -19,6 +19,6 @@ func main() {
 	if textInterface {
 		CreateGame(storyYamlPath, CreateRenderToConsole()).Play()
 	} else {
-		CreateGame(storyYamlPath, CreateRenderToAudio()).Play()
+		CreateGame(storyYamlPath, CreateRenderToEspeak()).Play()
 	}
 }

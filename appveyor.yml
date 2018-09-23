@@ -19,6 +19,7 @@ install:
   - msiexec /i go%GOVERSION%.windows-amd64.msi /q
   - go version
   # Install the dependencies.
+  - go get github.com/ricallinson/tts
   - go get gopkg.in/yaml.v2
   - go get github.com/ricallinson/simplebdd
 
