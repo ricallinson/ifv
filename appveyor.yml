@@ -5,7 +5,7 @@ version: "{build}"
 environment:
   GOPATH: c:\gopath
   DEPTESTBYPASS501: 1
-  GOVERSION: 1.10.2
+  GOVERSION: 1.12
 
 init:
   - git config --global core.autocrlf input
@@ -19,7 +19,6 @@ install:
   - msiexec /i go%GOVERSION%.windows-amd64.msi /q
   - go version
   # Install the dependencies.
-  - go get github.com/ricallinson/tts
   - go get gopkg.in/yaml.v2
   - go get github.com/ricallinson/simplebdd
 
