@@ -15,7 +15,7 @@ init:
 install:
   # Install the specific Go version.
   - rmdir c:\go /s /q
-  - appveyor DownloadFile https://dl.google.com/go/go1.10.2.windows-amd64.msi
+  - appveyor DownloadFile https://dl.google.com/go/go1.12.windows-amd64.msi
   - msiexec /i go%GOVERSION%.windows-amd64.msi /q
   - go version
   # Install the dependencies.
