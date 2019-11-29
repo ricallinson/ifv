@@ -76,14 +76,14 @@ func (this *Story) GetItem(id string) *Item {
 
 func (this *Story) Discribe() string {
 	if len(this.Scene) == 0 {
-		return "Story begins"
+		return "Story begins."
 	}
 	return this.Scene
 }
 
 func (this *Story) DiscribeQuit() string {
 	if len(this.QuitTitle) == 0 {
-		return "Quit"
+		return "Quit game."
 	}
 	return randStringSelection(this.QuitTitle)
 }
