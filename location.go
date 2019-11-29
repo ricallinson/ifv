@@ -14,12 +14,21 @@ type LocationExit struct {
 func (this *LocationExit) Discribe() string {
 	if this.visited == false {
 		this.visited = true
+		if len(this.Scene) == 0 {
+			return this.Id
+		}
 		return this.Scene
+	}
+	if len(this.Descriptions) == 0 {
+		return this.Id
 	}
 	return randStringSelection(this.Descriptions)
 }
 
 func (this *LocationExit) DiscribeOptions() string {
+	if len(this.Options) == 0 {
+		return "Exit to " + this.Id
+	}
 	return randStringSelection(this.Options)
 }
 
@@ -34,7 +43,13 @@ type Location struct {
 func (this *Location) Discribe() string {
 	if this.visited == false {
 		this.visited = true
+		if len(this.Scene) == 0 {
+			return this.Id
+		}
 		return this.Scene
+	}
+	if len(this.Descriptions) == 0 {
+		return this.Id
 	}
 	return randStringSelection(this.Descriptions)
 }

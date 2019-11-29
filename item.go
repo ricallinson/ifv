@@ -2,17 +2,6 @@ package main
 
 import ()
 
-type Result struct {
-	Exits []string `yaml:"Exits"`
-	Items []string `yaml:"Items"`
-}
-
-type Conditions struct {
-	Location      []string `yaml:"Location"`
-	LocationItems []string `yaml:"LocationItems"`
-	UserItems     []string `yaml:"UserItems"`
-}
-
 type Item struct {
 	Id             string      `yaml:"Id"`
 	Hidden         bool        `yaml:"Hidden"`
@@ -31,7 +20,13 @@ type Item struct {
 func (this *Item) Discribe() string {
 	if this.visited == false {
 		this.visited = true
+		if len(this.Scene) == 0 {
+			return this.Id
+		}
 		return this.Scene
+	}
+	if len(this.Descriptions) == 0 {
+		return this.Id
 	}
 	return randStringSelection(this.Descriptions)
 }
@@ -57,21 +52,36 @@ func (this *Item) Test(loc *Location, locItems []*Item, userItems []*Item) bool 
 }
 
 func (this *Item) DiscribeOptionsUse() string {
+	if len(this.OptionsUse) == 0 {
+		return "Use " + this.Id
+	}
 	return randStringSelection(this.OptionsUse)
 }
 
 func (this *Item) DiscribeOptionsPickup() string {
+	if len(this.OptionsPickup) == 0 {
+		return "Pickup " + this.Id
+	}
 	return randStringSelection(this.OptionsPickup)
 }
 
 func (this *Item) DiscribeOptionsPutdown() string {
+	if len(this.OptionsPutdown) == 0 {
+		return "Put down " + this.Id
+	}
 	return randStringSelection(this.OptionsPutdown)
 }
 
 func (this *Item) DiscribeSuccess() string {
+	if len(this.Success) == 0 {
+		return "Success using " + this.Id
+	}
 	return randStringSelection(this.Success)
 }
 
 func (this *Item) DiscribeFailure() string {
+	if len(this.Failure) == 0 {
+		return "Failure using " + this.Id
+	}
 	return randStringSelection(this.Failure)
 }

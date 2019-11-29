@@ -1,0 +1,38 @@
+---
+Title: "Short"
+
+LocationStart:
+  - bed
+
+LocationEnd:
+  - stairs
+
+Locations:
+  - Id: bed
+    Exits:
+      - Id: kitchen
+  - Id: kitchen
+    Exits:
+      - Id: bed
+      - Id: stairs
+        Hidden: true
+  - Id: stairs
+
+Items:
+  - Id: cup
+  - Id: hammer
+    Conditions:
+      Location: 
+        - kitchen
+      LocationItems:
+        - cup
+      UserItems:
+        - hammer
+    Result:
+      Exits: 
+        - stairs
+      Items:
+        - cup
+ItemsLocations:
+  hammer: bed
+  cup: kitchen
