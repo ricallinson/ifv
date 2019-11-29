@@ -1,4 +1,4 @@
-# Interactive Fiction Voice
+# Interactive Fiction Viewer
 
 [![Build Status](https://travis-ci.org/ricallinson/ifv.svg?branch=master)](https://travis-ci.org/ricallinson/ifv) [![Build status](https://ci.appveyor.com/api/projects/status/me65m9g0ji5aj431/branch/master?svg=true)](https://ci.appveyor.com/project/ricallinson/ifv/branch/master)
 
