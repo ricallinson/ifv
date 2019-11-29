@@ -14,12 +14,19 @@ type Game struct {
 	quit        bool
 }
 
+type GameState struct {
+	Userloc     string            `yaml:"UserLoc"`
+	Itemloc     map[string]string `yaml:"ItemLoc"`
+	ItemsHidden []string          `yaml:"ItemsHidden"`
+	ExitsHidden []string          `yaml:"ExitsHidden"`
+}
+
 type MenuOption struct {
 	Title  string
 	Action func()
 }
 
-func CreateGame(p string, r Renderer) *Game {
+func CreateGame(p string, s string, r Renderer) *Game {
 	this := &Game{
 		story:       CreateStory(p),
 		render:      r,
@@ -31,6 +38,9 @@ func CreateGame(p string, r Renderer) *Game {
 	this.itemloc = this.story.GetItemLocations()
 	this.itemsHidden = this.story.GetHiddenItems()
 	this.exitsHidden = this.story.GetHiddenExits()
+	if len(s) > 0 {
+		this.applyGameState(s)
+	}
 	// Validate game data here.
 	return this
 }
@@ -46,6 +56,10 @@ func (this *Game) Play() {
 		this.loop()
 	}
 	this.render.Quit()
+}
+
+func (this *Game) applyGameState(p string) {
+
 }
 
 func (this *Game) loop() {

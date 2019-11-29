@@ -14,5 +14,5 @@ func main() {
 		fmt.Println("You must supply a path to the location of the story file to use for the game.")
 		os.Exit(1)
 	}
-	CreateGame(storyYamlPath, CreateRenderToConsole()).Play()
+	CreateGame(storyYamlPath, "", CreateRenderToConsole()).Play()
 }

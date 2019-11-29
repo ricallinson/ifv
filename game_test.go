@@ -14,7 +14,7 @@ func TestGame(t *testing.T) {
 
 	BeforeEach(func() {
 		b = CreateRenderToBuffer()
-		g = CreateGame("./fixtures/story.yaml", b)
+		g = CreateGame("./fixtures/story.yaml", "", b)
 	})
 
 	AfterEach(func() {

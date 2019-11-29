@@ -28,18 +28,29 @@ QuitTitle:
 # Locations are the main building block of the game universe.
 # There must be at least two. One for "LocationStart" and one for "LocationEnd". They cannot be the same.
 Locations:
+  # Location `Id` must be a unique name.
   - Id: bed
-    Scene: "There's a small cot bed in the corner of the room. This is where you've been sleeping for as long as you can remember. And it smells like it too."
+    # The `Scene` is the first interaction the player has with this location. This text is only shown the first time the player enters the location.
+    Scene: "There's a small cot bed in the corner of the room. This is where you've been sleeping for what seems like eternity, and it smells like it."
+    # One of the `Descriptions` is randomly selected in place of the above text on subsequent player visits to the location.
+    # There must be at least one.
     Descriptions:
       - "It's still there, in all its glory, your smelly dirty bed."
-      - "Good old yellow sheets, the bed of champions today."
-      - "Your bed, if you could compare, is one the CIA wouldn't even stoop to use for torture."
+      - "Good old yellow sheets, the bed of champions."
+      - "Your bed is something the CIA wouldn't even stoop to use for torture."
+    # The `Exits`
     Exits:
+      # Location `Exits` must be a `Location` name.
+      # There must be at least one.
       - Id: kitchen
         Scene: "About 2 feet away over a floor that smells of rotten food is your kitchen. Not a pretty sight. The water ran out some time ago so nothings been washed in a while."
+        # One of the `Descriptions` is randomly selected in place of the above text on subsequent player visits to the exit.
+        # There must be at least one.
         Descriptions:
           - "You smell something! Looking at your feet you think you've got some toilet paper stuck to your foot. It's not. You look at your kitchen and wonder what you've been eating."
-          - "Looking at the kitchen counter you see cockroach run off under the sink. Dam things can survive anywhere."
+          - "Looking at the kitchen counter you see a cockroach run under the sink. Dam things can survive anywhere."
+        # One of the `Options` is randomly selected to ask the player if they want to exit the current location.
+        # There must be at least one.
         Options:
           - "Step over to the kitchen?"
           - "Move to the sink?"
@@ -107,11 +118,11 @@ Items:
         - cup
       UserItems:
         - hammer
-    Result: # Once the item is used the following locations and items are toggled with hidden.
+    Result: # Once the item is used the following locations and items are toggled with `Hidden`.
       Exits: 
         - stairs
       Items:
         - cup
-ItemsLocations:
+ItemsLocations: # The starting point of each item entered under `Items`.
   hammer: bed
   cup: kitchen
